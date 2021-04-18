@@ -27,7 +27,7 @@ class WeatherViewController: UIViewController {
         addChild(pageController)
         view.addSubview(pageController.view)
         pageController.view.fillSuperview()
-        pageController.setViewControllers([generateViewController()], direction: .forward, animated: false, completion: nil)
+        pageController.setViewControllers([generateWeatherViewController()], direction: .forward, animated: false, completion: nil)
         
         pageController.dataSource = self
         pageController.delegate = self
@@ -36,40 +36,39 @@ class WeatherViewController: UIViewController {
 
 extension WeatherViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return generateViewController()
+        return generateWeatherViewController()
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return generateViewController()
+        return generateWeatherViewController()
     }
     
-    private func generateViewController() -> UIViewController {
-        let vc = UIViewController()
-        vc.view.backgroundColor = Bool.random() ? .green : .red
+    private func generateWeatherViewController() -> UIViewController {
+        let vc = WeatherCollectionViewController()
         return vc
     }
     
 }
 
-#if DEBUG
-import SwiftUI
-
-struct WeatherVCRepresentable: UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-
-    }
-
-    @available(iOS 13.0.0, *)
-    func makeUIViewController(context: Context) -> UIViewController {
-        WeatherViewController()
-    }
-}
-
-@available(iOS 13.0, *)
-struct MainVCPreview: PreviewProvider {
-    static var previews: some View {
-        WeatherVCRepresentable()
-    }
-}
-#endif
-
+//#if DEBUG
+//import SwiftUI
+//
+//struct WeatherVCRepresentable: UIViewControllerRepresentable {
+//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//
+//    }
+//
+//    @available(iOS 13.0.0, *)
+//    func makeUIViewController(context: Context) -> UIViewController {
+//        WeatherViewController()
+//    }
+//}
+//
+//@available(iOS 13.0, *)
+//struct MainVCPreview: PreviewProvider {
+//    static var previews: some View {
+//        WeatherVCRepresentable()
+//    }
+//}
+//#endif
+//

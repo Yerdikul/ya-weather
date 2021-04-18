@@ -7,82 +7,133 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseHourlyIdentifier = "HourlyWeatherCollectionViewCell"
+private let reuseDailyIdentifier = "DailyWeatherCollectionViewCell"
+private let reuseHeaderIdentifier = "WeatherHeaderView"
+private let reuseFooterIdentifier = "WeatherFooterView"
 
-class WeatherCollectionViewController: UICollectionViewController {
+private enum WeatherSection {
+    case daily, hourly
+    
+    func cellsCount() -> Int {
+        switch self {
+        case .hourly: return 1
+        case .daily: return 7
+    }}
+    
+    func cellSize() -> CGFloat {
+        switch self {
+        case .hourly: return 60.0
+        case .daily: return 24.0
+    }}
+    
+    func minimumLineSpacing() -> CGFloat {
+        switch self {
+        case .daily: return 4.0
+        case .hourly: return .zero
+    }}
+}
 
+final class WeatherCollectionViewController: UICollectionViewController {
+
+    private var sections: [WeatherSection] {
+        get {
+            return [.hourly, .daily]
+        }
+    }
+    
+    private let bgImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "clear")
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+
+    init() {
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        configureUI()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    private func configureUI() {
+        configureCollectionView()
     }
-    */
+    
+    private func configureCollectionView() {
+        self.collectionView!.register(HourlyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: reuseHourlyIdentifier)
+        self.collectionView!.register(DailyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: reuseDailyIdentifier)
+        self.collectionView.register(WeatherHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
 
-    // MARK: UICollectionViewDataSource
+        collectionView.delegate = self
+        collectionView.dataSource = self
+
+        collectionView.backgroundView = bgImageView
+    }
+}
+
+extension WeatherCollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return sections.count
     }
 
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return sections[section].cellsCount()
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        switch sections[indexPath.section] {
+        case .hourly:
+            return self.collectionView(collectionView, cellForHourlyItemAt: indexPath)
+        case .daily:
+            return self.collectionView(collectionView, cellForDailyItemAt: indexPath)
+        }
+    }
     
-        // Configure the cell
+    private func collectionView(_ collectionView: UICollectionView, cellForHourlyItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseHourlyIdentifier, for: indexPath) as! HourlyWeatherCollectionViewCell
+        return cell
+    }
     
+    private func collectionView(_ collectionView: UICollectionView, cellForDailyItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseDailyIdentifier, for: indexPath) as! DailyWeatherCollectionViewCell
+        cell.backgroundColor = .blue
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! WeatherHeaderView
+            headerView.show(name: "Nur-Sultan", degree: 10.0)
+            return headerView
+        default:
+            assert(false, "Unexpected element kind")
+        }
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }
+
+extension WeatherCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        guard section == 0 else { return CGSize.zero }
+        return CGSize(width: collectionView.frame.size.width, height: 250.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: sections[indexPath.section].cellSize())
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sections[section].minimumLineSpacing()
+    }
+}
+
