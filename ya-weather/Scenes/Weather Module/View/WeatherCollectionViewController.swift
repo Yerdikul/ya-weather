@@ -20,9 +20,15 @@ protocol WeatherViewProtocol: class {
     func presenter(didFailRetrieveViewModel message: String)
 }
 
+private struct WeatherConstant {
+    static let headerViewHeight: CGFloat = 250.0
+    static let bgImageAlpha: CGFloat = 0.75
+    static let bgImage = UIImage(named: "clear")
+}
+
 private enum WeatherSection {
     case daily, hourly
-        
+    
     func cellHeight() -> CGFloat {
         switch self {
         case .hourly: return 80.0
@@ -41,17 +47,13 @@ final class WeatherCollectionViewController: UICollectionViewController, Weather
     var router: WeatherRouterProtocol?
     private var viewModel: WeatherViewModel?
     
-    private var sections: [WeatherSection] {
-        get {
-            return [.hourly, .daily]
-        }
-    }
+    private var sections: [WeatherSection] = [.hourly, .daily]
     
     private let bgImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "clear")
+        imageView.image = WeatherConstant.bgImage
+        imageView.alpha = WeatherConstant.bgImageAlpha
         imageView.clipsToBounds = true
-        imageView.alpha = 0.75
         return imageView
     }()
 
@@ -95,11 +97,7 @@ extension WeatherCollectionViewController {
     }
     
     func presenter(didFailRetrieveViewModel message: String) {
-        
-    }
-    
-    private func showError() {
-        
+        showError(message)
     }
 }
 
@@ -159,7 +157,7 @@ extension WeatherCollectionViewController {
 extension WeatherCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         guard section == 0 else { return CGSize.zero }
-        return CGSize(width: collectionView.frame.size.width, height: 250.0)
+        return CGSize(width: collectionView.frame.size.width, height: WeatherConstant.headerViewHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {

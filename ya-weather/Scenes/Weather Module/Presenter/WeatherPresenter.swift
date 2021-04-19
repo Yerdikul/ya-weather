@@ -9,6 +9,7 @@ import Foundation
 
 protocol WeatherPresenterProtocol {
     func interactor(didFetch object: YaWeatherEntity)
+    func interactor(didFailRequest message: String)
 }
 
 struct WeatherViewModel {
@@ -21,7 +22,6 @@ struct WeatherViewModel {
 struct HourlyViewModel {
     let temp: Int?
     let hour: String?
-    
 }
 
 struct DailyViewModel {
@@ -31,6 +31,10 @@ struct DailyViewModel {
 }
 
 class WeatherPresenter: WeatherPresenterProtocol {
+    func interactor(didFailRequest message: String) {
+        viewController?.presenter(didFailRetrieveViewModel: message)
+    }
+    
     weak var viewController: WeatherViewProtocol?
 
     func interactor(didFetch entity: YaWeatherEntity) {

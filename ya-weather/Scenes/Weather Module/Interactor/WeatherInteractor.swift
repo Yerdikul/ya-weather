@@ -27,6 +27,8 @@ final class WeatherInteractor: WeatherInteractorProtocol {
         yaWeatherAPIWorker.fetchWeather(lat: coordinate.lat, lon: coordinate.lng) { (yaWeather) in
             self.yaWeather = yaWeather
             self.presenter?.interactor(didFetch: yaWeather)
+        } errorCallback: { (message) in
+            self.presenter?.interactor(didFailRequest: message)
         }
     }
 }

@@ -13,5 +13,4 @@ protocol WeatherRouterProtocol {
 
 class WeatherRouter: WeatherRouterProtocol {
     weak var navigationController: UINavigationController?
-
 }

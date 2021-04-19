@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 protocol YaWeatherAPIWorkerProtocol {
-    func fetchWeather(lat: Double, lon: Double, callback: @escaping (YaWeatherEntity) -> Void)
+    func fetchWeather(lat: Double, lon: Double, callback: @escaping (YaWeatherEntity) -> Void, errorCallback: @escaping (String) -> Void)
 }
 
 fileprivate struct YaWeatherRequest: Encodable {
@@ -19,7 +19,7 @@ fileprivate struct YaWeatherRequest: Encodable {
 }
 
 class YaWeatherAPIWorker: YaWeatherAPIWorkerProtocol {
-    func fetchWeather(lat: Double, lon: Double, callback: @escaping (YaWeatherEntity) -> Void) {
+    func fetchWeather(lat: Double, lon: Double, callback: @escaping (YaWeatherEntity) -> Void, errorCallback: @escaping (String) -> Void) {
         let headers: HTTPHeaders = [
             YaWeatherAPIConstant.HeaderKeys.apiKey: YaWeatherAPIConstant.HeaderParams.apiKey,
         ]
@@ -33,13 +33,16 @@ class YaWeatherAPIWorker: YaWeatherAPIWorkerProtocol {
                     let entity = try jsonDecoder.decode(YaWeatherEntity.self, from: data)
                     callback(entity)
                 } catch (let error) {
-                    // TODO: - Error handling
+                    errorCallback(error.localizedDescription)
+                    
                     print(error.localizedDescription)
                     print(error.asAFError.debugDescription)
                 }
             case .failure(let error):
-                // TODO: - Error handling
+                errorCallback(error.localizedDescription)
+                
                 print(error.localizedDescription)
+                print(error.asAFError.debugDescription)
             }
         }
     }
