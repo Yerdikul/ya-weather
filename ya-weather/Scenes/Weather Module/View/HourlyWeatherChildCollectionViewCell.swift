@@ -8,5 +8,39 @@
 import UIKit
 
 final class HourlyWeatherChildCollectionViewCell: UICollectionViewCell {
+    let hourLabel = UILabel()
+    let tempLabel = UILabel()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupUI() {
+        contentView.addSubview(hourLabel)
+        contentView.addSubview(tempLabel)
+
+        hourLabel.anchor(top: contentView.topAnchor,
+                         leading: contentView.leadingAnchor,
+                         bottom: tempLabel.topAnchor,
+                         trailing: contentView.trailingAnchor)
+        
+        tempLabel.anchor(top: hourLabel.bottomAnchor,
+                           leading: contentView.leadingAnchor,
+                           bottom: contentView.bottomAnchor,
+                           trailing: contentView.trailingAnchor)
+    }
+    
+    func showViewModel(view: HourlyViewModel?) {
+        guard let view = view else {
+            return
+        }
+        hourLabel.text = view.hour
+        tempLabel.text = (view.temp != nil) ? String(view.temp!) : "NaN"
+        layoutIfNeeded()
+    }
 }

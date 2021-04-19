@@ -11,7 +11,12 @@ let reuseHourlyCellIdentifier = "HourlyWeatherChildCollectionViewCell"
 final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     
     var collectionView: UICollectionView
+    private var hoursData: [HourlyViewModel]?
     
+    func showHoursData(hoursData: [HourlyViewModel]?) {
+        self.hoursData = hoursData
+        collectionView.reloadData()
+    }
     
     override init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
@@ -44,13 +49,13 @@ final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
 
 extension HourlyWeatherCollectionViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return hoursData?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseHourlyCellIdentifier, for: indexPath) as! HourlyWeatherChildCollectionViewCell
-        cell.backgroundColor = .red
+        cell.showViewModel(view: hoursData?[indexPath.row])
         return cell
     }
 }

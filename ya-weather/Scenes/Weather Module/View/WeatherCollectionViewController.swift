@@ -105,6 +105,7 @@ extension WeatherCollectionViewController {
     
     private func collectionView(_ collectionView: UICollectionView, cellForHourlyItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseHourlyIdentifier, for: indexPath) as! HourlyWeatherCollectionViewCell
+        cell.showHoursData(hoursData: viewModel?.todayHours)
         return cell
     }
     
