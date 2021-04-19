@@ -7,6 +7,6 @@
 
 import UIKit
 
-class HourlyWeatherChildCollectionViewCell: UICollectionViewCell {
+final class HourlyWeatherChildCollectionViewCell: UICollectionViewCell {
     
 }

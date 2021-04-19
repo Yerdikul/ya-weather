@@ -8,7 +8,7 @@
 import UIKit
 
 let reuseHourlyCellIdentifier = "HourlyWeatherChildCollectionViewCell"
-class HourlyWeatherCollectionViewCell: UICollectionViewCell {
+final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     
     var collectionView: UICollectionView
     

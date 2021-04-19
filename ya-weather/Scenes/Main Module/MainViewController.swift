@@ -7,18 +7,17 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+final class MainViewController: UIViewController {
     private var pageController = UIPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal)
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configUI()
     }
-
+    
     private func configUI() {
         configurePageController()
     }
@@ -34,7 +33,7 @@ class WeatherViewController: UIViewController {
     }
 }
 
-extension WeatherViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension MainViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         return generateWeatherViewController()
     }
@@ -45,30 +44,8 @@ extension WeatherViewController: UIPageViewControllerDataSource, UIPageViewContr
     
     private func generateWeatherViewController() -> UIViewController {
         let vc = WeatherCollectionViewController()
+        WeatherConfigurator.configureModule(viewController: vc, latLng: LatLng(lat: 51.169392, lng: 71.449074))
         return vc
     }
     
 }
-
-//#if DEBUG
-//import SwiftUI
-//
-//struct WeatherVCRepresentable: UIViewControllerRepresentable {
-//    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//
-//    }
-//
-//    @available(iOS 13.0.0, *)
-//    func makeUIViewController(context: Context) -> UIViewController {
-//        WeatherViewController()
-//    }
-//}
-//
-//@available(iOS 13.0, *)
-//struct MainVCPreview: PreviewProvider {
-//    static var previews: some View {
-//        WeatherVCRepresentable()
-//    }
-//}
-//#endif
-//

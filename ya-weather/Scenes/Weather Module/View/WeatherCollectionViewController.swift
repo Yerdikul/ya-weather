@@ -12,30 +12,18 @@ private let reuseDailyIdentifier = "DailyWeatherCollectionViewCell"
 private let reuseHeaderIdentifier = "WeatherHeaderView"
 private let reuseFooterIdentifier = "WeatherFooterView"
 
-private enum WeatherSection {
-    case daily, hourly
+protocol WeatherViewProtocol: class {
+    var interactor: WeatherInteractorProtocol? { get set }
+    var router:  WeatherRouterProtocol? { get set }
     
-    func cellsCount() -> Int {
-        switch self {
-        case .hourly: return 1
-        case .daily: return 7
-    }}
-    
-    func cellSize() -> CGFloat {
-        switch self {
-        case .hourly: return 60.0
-        case .daily: return 24.0
-    }}
-    
-    func minimumLineSpacing() -> CGFloat {
-        switch self {
-        case .daily: return 4.0
-        case .hourly: return .zero
-    }}
+    func presenter(didRetrieveViewModel viewModel: WeatherViewModel)
+    func presenter(didFailRetrieveViewModel message: String)
 }
-
-final class WeatherCollectionViewController: UICollectionViewController {
-
+final class WeatherCollectionViewController: UICollectionViewController, WeatherViewProtocol {
+    var interactor: WeatherInteractorProtocol?
+    var router: WeatherRouterProtocol?
+    private var viewModel: WeatherViewModel?
+    
     private var sections: [WeatherSection] {
         get {
             return [.hourly, .daily]
@@ -61,6 +49,7 @@ final class WeatherCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         configureUI()
+        interactor?.fetchWeather()
     }
     
     private func configureUI() {
@@ -76,6 +65,22 @@ final class WeatherCollectionViewController: UICollectionViewController {
         collectionView.dataSource = self
 
         collectionView.backgroundView = bgImageView
+    }
+}
+
+extension WeatherCollectionViewController {
+    
+    func presenter(didRetrieveViewModel viewModel: WeatherViewModel) {
+        self.viewModel = viewModel
+        self.collectionView.reloadData()
+    }
+    
+    func presenter(didFailRetrieveViewModel message: String) {
+        
+    }
+    
+    private func showError() {
+        
     }
 }
 
@@ -113,7 +118,7 @@ extension WeatherCollectionViewController {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! WeatherHeaderView
-            headerView.show(name: "Nur-Sultan", degree: 10.0)
+            headerView.show(name: viewModel?.cityName ?? "", temp: viewModel?.temp ?? -1)
             return headerView
         default:
             assert(false, "Unexpected element kind")
@@ -137,3 +142,24 @@ extension WeatherCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+private enum WeatherSection {
+    case daily, hourly
+    
+    func cellsCount() -> Int {
+        switch self {
+        case .hourly: return 1
+        case .daily: return 7
+    }}
+    
+    func cellSize() -> CGFloat {
+        switch self {
+        case .hourly: return 60.0
+        case .daily: return 24.0
+    }}
+    
+    func minimumLineSpacing() -> CGFloat {
+        switch self {
+        case .daily: return 4.0
+        case .hourly: return .zero
+    }}
+}

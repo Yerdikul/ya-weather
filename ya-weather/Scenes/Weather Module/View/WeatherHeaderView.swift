@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherHeaderView: UICollectionReusableView {
+final class WeatherHeaderView: UICollectionReusableView {
     let namelabel: UILabel
     let degreeLabel: UILabel
     
@@ -53,9 +53,9 @@ class WeatherHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func show(name: String, degree: Double) {
+    func show(name: String, temp: Int? ) {
         namelabel.text = name
-        degreeLabel.text = "\(degree)°C"
+        degreeLabel.text = (temp != nil) ? "\(temp!)°C" : ""
         namelabel.updateConstraints()
         degreeLabel.updateConstraints()
     }

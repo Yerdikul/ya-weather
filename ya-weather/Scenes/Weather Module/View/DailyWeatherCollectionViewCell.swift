@@ -7,6 +7,6 @@
 
 import UIKit
 
-class DailyWeatherCollectionViewCell: UICollectionViewCell {
+final class DailyWeatherCollectionViewCell: UICollectionViewCell {
     
 }

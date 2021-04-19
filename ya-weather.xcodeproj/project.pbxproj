@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,18 @@
 		941AA492262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941AA491262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift */; };
 		941AA49A262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941AA499262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift */; };
 		941AA4A8262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941AA4A7262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift */; };
+		94393C44262DA327003E89CA /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94393C43262DA327003E89CA /* APIKeys.swift */; };
+		943CCCDA262CC16700392DCC /* YaWeatherAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCCD9262CC16700392DCC /* YaWeatherAPIWorker.swift */; };
+		943CCCE8262CC20A00392DCC /* YaWeatherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCCE7262CC20A00392DCC /* YaWeatherEntity.swift */; };
+		943CCCEE262CC43300392DCC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 943CCCED262CC43300392DCC /* Alamofire */; };
+		943CCCF4262CC92600392DCC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCCF3262CC92600392DCC /* Constants.swift */; };
+		943CCCFD262CDE9000392DCC /* WeatherInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCCFC262CDE9000392DCC /* WeatherInteractor.swift */; };
+		943CCD06262CE04800392DCC /* WeatherPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCD05262CE04800392DCC /* WeatherPresenter.swift */; };
+		943CCD0D262D6BB800392DCC /* WeatherConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCD0C262D6BB800392DCC /* WeatherConfigurator.swift */; };
+		943CCD16262D716D00392DCC /* WeatherRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCD15262D716D00392DCC /* WeatherRouter.swift */; };
 		94660003262A147B00FC44BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94660002262A147B00FC44BC /* AppDelegate.swift */; };
 		94660005262A147B00FC44BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94660004262A147B00FC44BC /* SceneDelegate.swift */; };
-		94660007262A147B00FC44BC /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94660006262A147B00FC44BC /* WeatherViewController.swift */; };
+		94660007262A147B00FC44BC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94660006262A147B00FC44BC /* MainViewController.swift */; };
 		9466000C262A147D00FC44BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9466000B262A147D00FC44BC /* Assets.xcassets */; };
 		9466000F262A147D00FC44BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9466000D262A147D00FC44BC /* LaunchScreen.storyboard */; };
 		9466001A262A147D00FC44BC /* ya_weatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94660019262A147D00FC44BC /* ya_weatherTests.swift */; };
@@ -46,9 +55,17 @@
 		941AA491262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		941AA499262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherChildCollectionViewCell.swift; sourceTree = "<group>"; };
 		941AA4A7262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		94393C43262DA327003E89CA /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		943CCCD9262CC16700392DCC /* YaWeatherAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaWeatherAPIWorker.swift; sourceTree = "<group>"; };
+		943CCCE7262CC20A00392DCC /* YaWeatherEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaWeatherEntity.swift; sourceTree = "<group>"; };
+		943CCCF3262CC92600392DCC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		943CCCFC262CDE9000392DCC /* WeatherInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInteractor.swift; sourceTree = "<group>"; };
+		943CCD05262CE04800392DCC /* WeatherPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPresenter.swift; sourceTree = "<group>"; };
+		943CCD0C262D6BB800392DCC /* WeatherConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConfigurator.swift; sourceTree = "<group>"; };
+		943CCD15262D716D00392DCC /* WeatherRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRouter.swift; sourceTree = "<group>"; };
 		94660002262A147B00FC44BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94660004262A147B00FC44BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		94660006262A147B00FC44BC /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		94660006262A147B00FC44BC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9466000B262A147D00FC44BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9466000E262A147D00FC44BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94660010262A147D00FC44BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				943CCCEE262CC43300392DCC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,25 +112,95 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		941A0819262A3036005D9D54 /* Weather */ = {
+		941A0819262A3036005D9D54 /* Weather Module */ = {
 			isa = PBXGroup;
 			children = (
+				943CCD14262D716100392DCC /* Router */,
+				943CCD0B262D6BA500392DCC /* Configurator */,
+				943CCD04262CE03900392DCC /* Presenter */,
+				943CCCFB262CDE7C00392DCC /* Interactor */,
+				943CCCE6262CC18400392DCC /* Entity */,
+				943CCCD8262CC11200392DCC /* Worker */,
 				941AA483262B71E3003F20C9 /* View */,
-				94660006262A147B00FC44BC /* WeatherViewController.swift */,
-				941A081A262A3051005D9D54 /* WeatherCollectionViewController.swift */,
 			);
-			path = Weather;
+			path = "Weather Module";
 			sourceTree = "<group>";
 		};
 		941AA483262B71E3003F20C9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				941A081A262A3051005D9D54 /* WeatherCollectionViewController.swift */,
 				941AA484262B720A003F20C9 /* WeatherHeaderView.swift */,
 				941AA491262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift */,
 				941AA499262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift */,
 				941AA4A7262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		943CCCD8262CC11200392DCC /* Worker */ = {
+			isa = PBXGroup;
+			children = (
+				943CCCD9262CC16700392DCC /* YaWeatherAPIWorker.swift */,
+			);
+			path = Worker;
+			sourceTree = "<group>";
+		};
+		943CCCE6262CC18400392DCC /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				943CCCE7262CC20A00392DCC /* YaWeatherEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		943CCCF2262CC8FE00392DCC /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				943CCCF3262CC92600392DCC /* Constants.swift */,
+				94393C43262DA327003E89CA /* APIKeys.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		943CCCFB262CDE7C00392DCC /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				943CCCFC262CDE9000392DCC /* WeatherInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		943CCD04262CE03900392DCC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				943CCD05262CE04800392DCC /* WeatherPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		943CCD0B262D6BA500392DCC /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				943CCD0C262D6BB800392DCC /* WeatherConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		943CCD14262D716100392DCC /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				943CCD15262D716D00392DCC /* WeatherRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		943CCD1D262D729300392DCC /* Main Module */ = {
+			isa = PBXGroup;
+			children = (
+				94660006262A147B00FC44BC /* MainViewController.swift */,
+			);
+			path = "Main Module";
 			sourceTree = "<group>";
 		};
 		94660000262A147B00FC44BC /* Products */ = {
@@ -128,6 +216,7 @@
 		94660001262A147B00FC44BC /* ya-weather */ = {
 			isa = PBXGroup;
 			children = (
+				943CCCF2262CC8FE00392DCC /* Helper */,
 				941A0810262A2D4A005D9D54 /* Utils */,
 				9466003D262A1E7A00FC44BC /* Scenes */,
 				9466003C262A1E4D00FC44BC /* AppDelegate */,
@@ -176,7 +265,8 @@
 		9466003D262A1E7A00FC44BC /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				941A0819262A3036005D9D54 /* Weather */,
+				943CCD1D262D729300392DCC /* Main Module */,
+				941A0819262A3036005D9D54 /* Weather Module */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -243,6 +333,9 @@
 			dependencies = (
 			);
 			name = "ya-weather";
+			packageProductDependencies = (
+				943CCCED262CC43300392DCC /* Alamofire */,
+			);
 			productName = "ya-weather";
 			productReference = 9466FFFF262A147B00FC44BC /* ya-weather.app */;
 			productType = "com.apple.product-type.application";
@@ -278,6 +371,9 @@
 				Base,
 			);
 			mainGroup = 9466FFF6262A147B00FC44BC;
+			packageReferences = (
+				943CCCEC262CC43300392DCC /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 94660000262A147B00FC44BC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -336,15 +432,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94660007262A147B00FC44BC /* WeatherViewController.swift in Sources */,
+				943CCD0D262D6BB800392DCC /* WeatherConfigurator.swift in Sources */,
+				94660007262A147B00FC44BC /* MainViewController.swift in Sources */,
+				943CCCFD262CDE9000392DCC /* WeatherInteractor.swift in Sources */,
 				941AA492262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift in Sources */,
 				941A0812262A2D5E005D9D54 /* UIView+AutoLayout.swift in Sources */,
 				94660003262A147B00FC44BC /* AppDelegate.swift in Sources */,
 				941A081B262A3051005D9D54 /* WeatherCollectionViewController.swift in Sources */,
+				94393C44262DA327003E89CA /* APIKeys.swift in Sources */,
 				941AA49A262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift in Sources */,
 				941AA485262B720A003F20C9 /* WeatherHeaderView.swift in Sources */,
+				943CCCE8262CC20A00392DCC /* YaWeatherEntity.swift in Sources */,
+				943CCD06262CE04800392DCC /* WeatherPresenter.swift in Sources */,
 				941AA4A8262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift in Sources */,
 				94660005262A147B00FC44BC /* SceneDelegate.swift in Sources */,
+				943CCCDA262CC16700392DCC /* YaWeatherAPIWorker.swift in Sources */,
+				943CCCF4262CC92600392DCC /* Constants.swift in Sources */,
+				943CCD16262D716D00392DCC /* WeatherRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +757,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		943CCCEC262CC43300392DCC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		943CCCED262CC43300392DCC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 943CCCEC262CC43300392DCC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9466FFF7262A147B00FC44BC /* Project object */;
 }
