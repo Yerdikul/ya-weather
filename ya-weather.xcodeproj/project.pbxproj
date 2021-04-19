@@ -14,6 +14,10 @@
 		941AA49A262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941AA499262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift */; };
 		941AA4A8262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941AA4A7262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift */; };
 		94393C44262DA327003E89CA /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94393C43262DA327003E89CA /* APIKeys.swift */; };
+		94393C49262DFAC6003E89CA /* UIEdgeInsets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94393C48262DFAC6003E89CA /* UIEdgeInsets+Extension.swift */; };
+		94393C4E262DFBF4003E89CA /* Optional+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94393C4D262DFBF4003E89CA /* Optional+Extension.swift */; };
+		94393C53262E0DA6003E89CA /* WeatherFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94393C52262E0DA6003E89CA /* WeatherFooterView.swift */; };
+		94393C66262E193D003E89CA /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94393C65262E193D003E89CA /* Date+Extension.swift */; };
 		943CCCDA262CC16700392DCC /* YaWeatherAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCCD9262CC16700392DCC /* YaWeatherAPIWorker.swift */; };
 		943CCCE8262CC20A00392DCC /* YaWeatherEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943CCCE7262CC20A00392DCC /* YaWeatherEntity.swift */; };
 		943CCCEE262CC43300392DCC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 943CCCED262CC43300392DCC /* Alamofire */; };
@@ -56,6 +60,10 @@
 		941AA499262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherChildCollectionViewCell.swift; sourceTree = "<group>"; };
 		941AA4A7262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		94393C43262DA327003E89CA /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
+		94393C48262DFAC6003E89CA /* UIEdgeInsets+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Extension.swift"; sourceTree = "<group>"; };
+		94393C4D262DFBF4003E89CA /* Optional+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Extension.swift"; sourceTree = "<group>"; };
+		94393C52262E0DA6003E89CA /* WeatherFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFooterView.swift; sourceTree = "<group>"; };
+		94393C65262E193D003E89CA /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		943CCCD9262CC16700392DCC /* YaWeatherAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaWeatherAPIWorker.swift; sourceTree = "<group>"; };
 		943CCCE7262CC20A00392DCC /* YaWeatherEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YaWeatherEntity.swift; sourceTree = "<group>"; };
 		943CCCF3262CC92600392DCC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -108,6 +116,9 @@
 			isa = PBXGroup;
 			children = (
 				941A0811262A2D5E005D9D54 /* UIView+AutoLayout.swift */,
+				94393C48262DFAC6003E89CA /* UIEdgeInsets+Extension.swift */,
+				94393C4D262DFBF4003E89CA /* Optional+Extension.swift */,
+				94393C65262E193D003E89CA /* Date+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -134,6 +145,7 @@
 				941AA491262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift */,
 				941AA499262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift */,
 				941AA4A7262C4EAC003F20C9 /* DailyWeatherCollectionViewCell.swift */,
+				94393C52262E0DA6003E89CA /* WeatherFooterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -434,12 +446,16 @@
 			files = (
 				943CCD0D262D6BB800392DCC /* WeatherConfigurator.swift in Sources */,
 				94660007262A147B00FC44BC /* MainViewController.swift in Sources */,
+				94393C53262E0DA6003E89CA /* WeatherFooterView.swift in Sources */,
+				94393C4E262DFBF4003E89CA /* Optional+Extension.swift in Sources */,
 				943CCCFD262CDE9000392DCC /* WeatherInteractor.swift in Sources */,
 				941AA492262B8F84003F20C9 /* HourlyWeatherCollectionViewCell.swift in Sources */,
 				941A0812262A2D5E005D9D54 /* UIView+AutoLayout.swift in Sources */,
 				94660003262A147B00FC44BC /* AppDelegate.swift in Sources */,
+				94393C49262DFAC6003E89CA /* UIEdgeInsets+Extension.swift in Sources */,
 				941A081B262A3051005D9D54 /* WeatherCollectionViewController.swift in Sources */,
 				94393C44262DA327003E89CA /* APIKeys.swift in Sources */,
+				94393C66262E193D003E89CA /* Date+Extension.swift in Sources */,
 				941AA49A262B931F003F20C9 /* HourlyWeatherChildCollectionViewCell.swift in Sources */,
 				941AA485262B720A003F20C9 /* WeatherHeaderView.swift in Sources */,
 				943CCCE8262CC20A00392DCC /* YaWeatherEntity.swift in Sources */,

@@ -27,7 +27,7 @@ struct HourlyViewModel {
 struct DailyViewModel {
     let name: String
     let dayTemp: Int?
-    let nighyTemp: Int?
+    let nightTemp: Int?
 }
 
 class WeatherPresenter: WeatherPresenterProtocol {
@@ -36,13 +36,21 @@ class WeatherPresenter: WeatherPresenterProtocol {
     func interactor(didFetch entity: YaWeatherEntity) {
         let todayHours = entity.forecasts.first?.hours.map{ HourlyViewModel(temp: $0.temp,
                                                                             hour: $0.hour) } ?? []
-        let days = entity.forecasts.map{DailyViewModel(name: $0.date,
+        let days = entity.forecasts.map{DailyViewModel(name: $0.dateWeekName,
                                                        dayTemp: $0.parts.day.tempAvg,
-                                                       nighyTemp: $0.parts.night.tempAvg)}
+                                                       nightTemp: $0.parts.night.tempAvg)}
 
         viewController?.presenter(didRetrieveViewModel: WeatherViewModel(cityName: entity.geoObject.locality.name,
                                                                              temp: entity.fact.temp,
                                                                              todayHours: todayHours,
                                                                              days: days))
+    }
+}
+
+private extension Forecast {
+    var dateWeekName: String {
+        get {
+            Date.weekdayDate.string(from: Date(timeIntervalSince1970: TimeInterval(dateTs)))
+        }
     }
 }

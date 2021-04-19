@@ -19,6 +19,23 @@ protocol WeatherViewProtocol: class {
     func presenter(didRetrieveViewModel viewModel: WeatherViewModel)
     func presenter(didFailRetrieveViewModel message: String)
 }
+
+private enum WeatherSection {
+    case daily, hourly
+        
+    func cellHeight() -> CGFloat {
+        switch self {
+        case .hourly: return 80.0
+        case .daily: return 40.0
+    }}
+    
+    func minimumLineSpacing() -> CGFloat {
+        switch self {
+        case .daily: return 4.0
+        case .hourly: return .zero
+    }}
+}
+
 final class WeatherCollectionViewController: UICollectionViewController, WeatherViewProtocol {
     var interactor: WeatherInteractorProtocol?
     var router: WeatherRouterProtocol?
@@ -34,6 +51,7 @@ final class WeatherCollectionViewController: UICollectionViewController, Weather
         let imageView = UIImageView()
         imageView.image = UIImage(named: "clear")
         imageView.clipsToBounds = true
+        imageView.alpha = 0.75
         return imageView
     }()
 
@@ -60,6 +78,7 @@ final class WeatherCollectionViewController: UICollectionViewController, Weather
         self.collectionView!.register(HourlyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: reuseHourlyIdentifier)
         self.collectionView!.register(DailyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: reuseDailyIdentifier)
         self.collectionView.register(WeatherHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
+        self.collectionView.register(WeatherFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: reuseFooterIdentifier)
 
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -91,7 +110,12 @@ extension WeatherCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].cellsCount()
+        switch sections[section] {
+        case .daily:
+            return viewModel?.days.count ?? 0
+        case.hourly:
+            return 1
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -111,7 +135,7 @@ extension WeatherCollectionViewController {
     
     private func collectionView(_ collectionView: UICollectionView, cellForDailyItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseDailyIdentifier, for: indexPath) as! DailyWeatherCollectionViewCell
-        cell.backgroundColor = .blue
+        cell.showViewModel(viewModel: viewModel?.days[indexPath.row])
         return cell
     }
 
@@ -121,6 +145,10 @@ extension WeatherCollectionViewController {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! WeatherHeaderView
             headerView.show(name: viewModel?.cityName ?? "", temp: viewModel?.temp ?? -1)
             return headerView
+            
+        case UICollectionView.elementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseFooterIdentifier, for: indexPath) as! WeatherFooterView
+            return footerView
         default:
             assert(false, "Unexpected element kind")
         }
@@ -134,33 +162,15 @@ extension WeatherCollectionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.size.width, height: 250.0)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.size.width, height: 0.5)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width, height: sections[indexPath.section].cellSize())
+        return CGSize(width: collectionView.frame.size.width, height: sections[indexPath.section].cellHeight())
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sections[section].minimumLineSpacing()
     }
-}
-
-private enum WeatherSection {
-    case daily, hourly
-    
-    func cellsCount() -> Int {
-        switch self {
-        case .hourly: return 1
-        case .daily: return 7
-    }}
-    
-    func cellSize() -> CGFloat {
-        switch self {
-        case .hourly: return 60.0
-        case .daily: return 24.0
-    }}
-    
-    func minimumLineSpacing() -> CGFloat {
-        switch self {
-        case .daily: return 4.0
-        case .hourly: return .zero
-    }}
 }

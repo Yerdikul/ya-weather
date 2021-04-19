@@ -42,7 +42,6 @@ final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
-
     }
 }
 

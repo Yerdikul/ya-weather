@@ -23,6 +23,9 @@ final class HourlyWeatherChildCollectionViewCell: UICollectionViewCell {
     private func setupUI() {
         contentView.addSubview(hourLabel)
         contentView.addSubview(tempLabel)
+        
+        hourLabel.textAlignment = .center
+        tempLabel.textAlignment = .center
 
         hourLabel.anchor(top: contentView.topAnchor,
                          leading: contentView.leadingAnchor,
@@ -33,6 +36,7 @@ final class HourlyWeatherChildCollectionViewCell: UICollectionViewCell {
                            leading: contentView.leadingAnchor,
                            bottom: contentView.bottomAnchor,
                            trailing: contentView.trailingAnchor)
+        hourLabel.heightAnchor.constraint(equalTo: tempLabel.heightAnchor, multiplier: 1.0).isActive = true
     }
     
     func showViewModel(view: HourlyViewModel?) {
@@ -40,7 +44,7 @@ final class HourlyWeatherChildCollectionViewCell: UICollectionViewCell {
             return
         }
         hourLabel.text = view.hour
-        tempLabel.text = (view.temp != nil) ? String(view.temp!) : "NaN"
+        tempLabel.text = ((view.temp != nil) ? String(view.temp!) : "NaN") + "°"
         layoutIfNeeded()
     }
 }
