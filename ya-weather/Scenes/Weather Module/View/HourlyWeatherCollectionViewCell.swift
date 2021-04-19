@@ -7,7 +7,13 @@
 
 import UIKit
 
-let reuseHourlyCellIdentifier = "HourlyWeatherChildCollectionViewCell"
+
+private struct HourlyWeatherConstants {
+    static let reuseHourlyCellIdentifier = "HourlyWeatherChildCollectionViewCell"
+    static let cellWidth: CGFloat = 35.0
+    static let collectionViewHorizontalPadding: CGFloat = 8.0
+}
+
 final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     
     var collectionView: UICollectionView
@@ -21,7 +27,10 @@ final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        layout.sectionInset = UIEdgeInsets(top: .zero,
+                                           left: HourlyWeatherConstants.collectionViewHorizontalPadding,
+                                           bottom: .zero,
+                                           right: HourlyWeatherConstants.collectionViewHorizontalPadding)
 
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         super.init(frame: frame)
@@ -38,7 +47,7 @@ final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.fillSuperview()
 
-        collectionView.register(HourlyWeatherChildCollectionViewCell.self, forCellWithReuseIdentifier: reuseHourlyCellIdentifier)
+        collectionView.register(HourlyWeatherChildCollectionViewCell.self, forCellWithReuseIdentifier: HourlyWeatherConstants.reuseHourlyCellIdentifier)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -53,7 +62,7 @@ extension HourlyWeatherCollectionViewCell: UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseHourlyCellIdentifier, for: indexPath) as! HourlyWeatherChildCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyWeatherConstants.reuseHourlyCellIdentifier, for: indexPath) as! HourlyWeatherChildCollectionViewCell
         cell.showViewModel(view: hoursData?[indexPath.row])
         return cell
     }
@@ -61,6 +70,6 @@ extension HourlyWeatherCollectionViewCell: UICollectionViewDelegate, UICollectio
 
 extension HourlyWeatherCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 35.0, height: collectionView.frame.size.height)
+        return CGSize(width: HourlyWeatherConstants.cellWidth, height: collectionView.frame.size.height)
     }
 }

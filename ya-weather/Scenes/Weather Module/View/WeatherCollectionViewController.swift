@@ -7,10 +7,6 @@
 
 import UIKit
 
-private let reuseHourlyIdentifier = "HourlyWeatherCollectionViewCell"
-private let reuseDailyIdentifier = "DailyWeatherCollectionViewCell"
-private let reuseHeaderIdentifier = "WeatherHeaderView"
-private let reuseFooterIdentifier = "WeatherFooterView"
 
 protocol WeatherViewProtocol: class {
     var interactor: WeatherInteractorProtocol? { get set }
@@ -24,6 +20,12 @@ private struct WeatherConstant {
     static let headerViewHeight: CGFloat = 250.0
     static let bgImageAlpha: CGFloat = 0.75
     static let bgImage = UIImage(named: "clear")
+    
+    static let reuseHourlyIdentifier = "HourlyWeatherCollectionViewCell"
+    static let reuseDailyIdentifier = "DailyWeatherCollectionViewCell"
+    static let reuseHeaderIdentifier = "WeatherHeaderView"
+    static let reuseFooterIdentifier = "WeatherFooterView"
+
 }
 
 private enum WeatherSection {
@@ -77,10 +79,10 @@ final class WeatherCollectionViewController: UICollectionViewController, Weather
     }
     
     private func configureCollectionView() {
-        self.collectionView!.register(HourlyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: reuseHourlyIdentifier)
-        self.collectionView!.register(DailyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: reuseDailyIdentifier)
-        self.collectionView.register(WeatherHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reuseHeaderIdentifier)
-        self.collectionView.register(WeatherFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: reuseFooterIdentifier)
+        self.collectionView.register(HourlyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherConstant.reuseHourlyIdentifier)
+        self.collectionView.register(DailyWeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherConstant.reuseDailyIdentifier)
+        self.collectionView.register(WeatherHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WeatherConstant.reuseHeaderIdentifier)
+        self.collectionView.register(WeatherFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: WeatherConstant.reuseFooterIdentifier)
 
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -126,13 +128,13 @@ extension WeatherCollectionViewController {
     }
     
     private func collectionView(_ collectionView: UICollectionView, cellForHourlyItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseHourlyIdentifier, for: indexPath) as! HourlyWeatherCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherConstant.reuseHourlyIdentifier, for: indexPath) as! HourlyWeatherCollectionViewCell
         cell.showHoursData(hoursData: viewModel?.todayHours)
         return cell
     }
     
     private func collectionView(_ collectionView: UICollectionView, cellForDailyItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseDailyIdentifier, for: indexPath) as! DailyWeatherCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherConstant.reuseDailyIdentifier, for: indexPath) as! DailyWeatherCollectionViewCell
         cell.showViewModel(viewModel: viewModel?.days[indexPath.row])
         return cell
     }
@@ -140,12 +142,12 @@ extension WeatherCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseHeaderIdentifier, for: indexPath) as! WeatherHeaderView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WeatherConstant.reuseHeaderIdentifier, for: indexPath) as! WeatherHeaderView
             headerView.show(name: viewModel?.cityName ?? "", temp: viewModel?.temp ?? -1)
             return headerView
             
         case UICollectionView.elementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseFooterIdentifier, for: indexPath) as! WeatherFooterView
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WeatherConstant.reuseFooterIdentifier, for: indexPath) as! WeatherFooterView
             return footerView
         default:
             assert(false, "Unexpected element kind")

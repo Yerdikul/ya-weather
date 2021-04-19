@@ -12,7 +12,7 @@ protocol YaWeatherAPIWorkerProtocol {
     func fetchWeather(lat: Double, lon: Double, callback: @escaping (YaWeatherEntity) -> Void, errorCallback: @escaping (String) -> Void)
 }
 
-fileprivate struct YaWeatherRequest: Encodable {
+private struct YaWeatherRequest: Encodable {
     let lat: Double
     let lon: Double
     let limit: Int
