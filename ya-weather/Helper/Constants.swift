@@ -18,3 +18,10 @@ struct YaWeatherAPIConstant {
         static let apiKey = APIKeys.yandexWeatherKey
     }
 }
+
+struct AppConfig {
+    static let coordinates = [LatLng(lat: 51.169392, lng: 71.449074), // Nur-Sultan
+                              LatLng(lat: 44.85278, lng: 65.50917),   // Kyzylorda
+                              LatLng(lat: 43.238949, lng: 76.889709), // Almaty
+                              LatLng(lat: 55.751244, lng: 37.618423)] // Moscow
+}

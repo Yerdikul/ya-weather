@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct LatLng {
-    let lat: Double
-    let lng: Double
-}
-
 protocol WeatherInteractorProtocol {
     func fetchWeather()
 }

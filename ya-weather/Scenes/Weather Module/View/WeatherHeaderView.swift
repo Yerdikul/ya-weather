@@ -31,12 +31,14 @@ final class WeatherHeaderView: UICollectionReusableView {
         namelabel.anchor(top: view.topAnchor,
                          leading: view.leadingAnchor,
                          bottom: degreeLabel.topAnchor,
-                         trailing: view.trailingAnchor)
+                         trailing: view.trailingAnchor,
+                         padding: UIEdgeInsets.init(t: .zero, l: .zero, b: 8.0, r: .zero))
         
         degreeLabel.anchor(top: namelabel.bottomAnchor,
                            leading: view.leadingAnchor,
                            bottom: view.bottomAnchor,
-                           trailing: view.trailingAnchor)
+                           trailing: view.trailingAnchor,
+                           padding: UIEdgeInsets.init(t: 8.0, l: .zero, b: .zero, r: .zero))
         
         namelabel.textAlignment = .center
         degreeLabel.textAlignment = .center

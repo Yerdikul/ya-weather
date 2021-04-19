@@ -35,7 +35,7 @@ final class DailyWeatherCollectionViewCell: UICollectionViewCell {
                          leading: contentView.leadingAnchor,
                          bottom: contentView.bottomAnchor,
                          trailing: nil,
-                         padding: UIEdgeInsets.init(t: .zero, l: 8.0, b: .zero, r: .zero),
+                         padding: UIEdgeInsets.init(t: .zero, l: 16.0, b: .zero, r: .zero),
                          size: CGSize.zero)
         nightTempLabel.anchor(top: contentView.topAnchor,
                               leading: dayTempLabel.trailingAnchor,

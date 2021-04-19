@@ -19,11 +19,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = MainViewController()
+        window?.rootViewController = getMainPage()
         window?.makeKeyAndVisible()
 
     }
 
+    private func getMainPage() -> MainPageViewController {
+        let mainPageViewController = MainPageViewController()
+        MainPageConfigurator.configureModule(viewController: mainPageViewController, coordinates: AppConfig.coordinates)
+        return mainPageViewController
+
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.

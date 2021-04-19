@@ -21,7 +21,7 @@ final class HourlyWeatherCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: 6)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
 
         collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         super.init(frame: frame)
