@@ -26,7 +26,7 @@ final class WeatherHeaderView: UICollectionReusableView {
         view.addSubview(namelabel)
         view.addSubview(degreeLabel)
         view.centerInSuperview()
-
+        view.anchor(top: nil, leading: self.leadingAnchor, bottom: nil, trailing: self.trailingAnchor)
         
         namelabel.anchor(top: view.topAnchor,
                          leading: view.leadingAnchor,
@@ -42,11 +42,9 @@ final class WeatherHeaderView: UICollectionReusableView {
         degreeLabel.textAlignment = .center
         
         namelabel.font = UIFont.systemFont(ofSize: 50.0)
-        degreeLabel.font = UIFont.systemFont(ofSize: 50.0)
+        degreeLabel.font = UIFont.systemFont(ofSize: 40.0)
 
-        namelabel.numberOfLines = 0
-        degreeLabel.numberOfLines = 0
-
+        namelabel.numberOfLines = 2
     }
     
     required init?(coder: NSCoder) {
@@ -55,10 +53,8 @@ final class WeatherHeaderView: UICollectionReusableView {
     
     func show(name: String, temp: Int? ) {
         namelabel.text = name
-        degreeLabel.text = (temp != nil) ? "\(temp!)°C" : ""
-        namelabel.updateConstraints()
-        degreeLabel.updateConstraints()
+        degreeLabel.text = (temp != nil) ? "\(temp!)°" : ""
+        self.layoutIfNeeded()
     }
-    
 
 }
